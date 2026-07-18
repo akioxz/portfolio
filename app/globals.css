@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dark {
+  --bg: 0 0 0;
+  --surface: 10 10 10;
+  --text: 255 255 255;
+  --text-secondary: 150 150 150;
+  --amber: 255 255 255;
+  --teal: 255 255 255;
+  --spotlight: 255, 255, 255;
+}
+
+.light {
+  --bg: 255 255 255;
+  --surface: 245 245 245;
+  --text: 0 0 0;
+  --text-secondary: 110 110 110;
+  --amber: 0 0 0;
+  --teal: 0 0 0;
+  --spotlight: 0, 0, 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  --theme-reveal-x: 50vw;
+  --theme-reveal-y: 50vh;
+  --theme-reveal-radius: 0px;
+}
+
+body,
+body * {
+  transition:
+    background-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-transitioning,
+.theme-transitioning * {
+  transition: none !important;
+}
+
+body {
+  background-color: rgb(var(--bg));
+}
+
+::view-transition-old(root) {
+  animation: theme-reveal-out 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+::view-transition-new(root) {
+  animation: theme-reveal-in 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes theme-reveal-in {
+  from {
+    clip-path: circle(0 at var(--theme-reveal-x) var(--theme-reveal-y));
+  }
+  to {
+    clip-path: circle(
+      var(--theme-reveal-radius) at var(--theme-reveal-x) var(--theme-reveal-y)
+    );
+  }
+}
+
+@keyframes theme-reveal-out {
+  from {
+    clip-path: circle(
+      var(--theme-reveal-radius) at var(--theme-reveal-x) var(--theme-reveal-y)
+    );
+  }
+  to {
+    clip-path: circle(0 at var(--theme-reveal-x) var(--theme-reveal-y));
+  }
+}

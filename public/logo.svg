@@ -1,0 +1,14 @@
+<svg width="220" height="64" viewBox="0 0 220 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AJV logo">
+  <title>AJV</title>
+  <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+    <path d="M6 8 L6 56" />
+    <path d="M6 8 L18 8" />
+    <path d="M6 56 L18 56" />
+  </g>
+  <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+    <path d="M214 8 L214 56" />
+    <path d="M214 8 L202 8" />
+    <path d="M214 56 L202 56" />
+  </g>
+  <text x="110" y="41" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="26" font-weight="600" letter-spacing="4" fill="currentColor">AJV</text>
+</svg>
