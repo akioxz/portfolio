@@ -48,7 +48,10 @@ export default function Hero() {
       {/* ── Avatar + Name Row ─────────────────── */}
       <div className="flex items-center gap-5 mb-6">
         {/* Circular Avatar with Pixel Transition */}
-        <div className="w-[130px] h-[130px] shrink-0">
+        <div
+          className="w-[130px] h-[130px] shrink-0"
+          style={{ transform: "translateZ(0)", willChange: "transform" }}
+        >
           <PixelTransition
             firstContent={
               <div className="relative w-full h-full rounded-full overflow-hidden">
@@ -83,7 +86,7 @@ export default function Hero() {
         </div>
 
         {/* Name + Social Icons */}
-        <div>
+        <div style={{ transform: "translateZ(0)", willChange: "transform" }}>
           <h1 className="font-mono text-[2rem] font-semibold text-cream leading-none mb-2">
             Axel Villanueva
           </h1>

@@ -15,7 +15,7 @@ export default function Home() {
     <>
       <Header />
 
-      <main className="mx-auto w-full max-w-4xl flex flex-col gap-14 sm:gap-16 px-4 sm:px-6 pb-10 sm:pb-24 pt-8">
+      <main className="mx-auto w-full max-w-4xl flex flex-col gap-14 sm:gap-16 px-4 sm:px-6 pb-10 sm:pb-24 pt-16 sm:pt-20">
         <Hero />
 
         <Projects />

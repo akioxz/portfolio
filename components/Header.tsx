@@ -1,25 +1,44 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { IoMenu, IoClose } from "react-icons/io5";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  // Track scroll for subtle background effect
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 0);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Close menu when clicking a link
-  const handleNavClick = () => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    e.preventDefault();
     setIsOpen(false);
+
+    // Prevent content sliding under a stationary cursor from firing
+    // spurious hover events (e.g. PixelTransition's mouseenter) during
+    // the programmatic scroll.
+    document.body.style.pointerEvents = "none";
+
+    if (href === "#hero") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    window.setTimeout(() => {
+      document.body.style.pointerEvents = "";
+
+      // Work around a Chrome GPU-compositing bug where a stale blurred frame
+      // is left painted over content after a smooth-scroll animation ends.
+      document.body.style.transform = "translateZ(0)";
+      requestAnimationFrame(() => {
+        document.body.style.transform = "";
+      });
+    }, 650);
   };
 
   const navLinks = [
@@ -30,19 +49,13 @@ export default function Header() {
   ];
 
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? "bg-ink/60 backdrop-blur-sm border-b border-slate/10"
-          : "bg-transparent border-b border-slate/5"
-      }`}
-    >
+    <header className="sticky top-0 z-50 w-full bg-ink/60 backdrop-blur-sm border-b border-slate/10">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 py-4">
         <div className="flex items-center justify-between gap-4">
           {/* Logo */}
           <a
             href="#hero"
-            onClick={handleNavClick}
+            onClick={(e) => handleNavClick(e, "#hero")}
             className="font-mono font-bold text-cream text-sm tracking-widest select-none hover:text-teal transition-colors duration-200"
           >
             AJV
@@ -55,6 +68,7 @@ export default function Header() {
                 <a
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="hover:text-teal transition-colors duration-200"
                 >
                   {link.label}
@@ -90,7 +104,7 @@ export default function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={handleNavClick}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="hover:text-teal transition-colors duration-200"
               >
                 {link.label}
