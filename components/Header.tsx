@@ -41,7 +41,7 @@ export default function Header() {
       <div className="mx-auto max-w-4xl px-4 sm:px-6 py-4">
         <div className="flex items-center justify-between gap-4">
           {/* Logo */}
-          
+          <a
             href="#hero"
             onClick={handleNavClick}
             className="font-mono font-bold text-cream text-sm tracking-widest select-none hover:text-teal transition-colors duration-200"
@@ -53,7 +53,7 @@ export default function Header() {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-5 font-mono text-xs uppercase tracking-[0.1em] text-slate">
               {navLinks.map((link) => (
-                
+                <a
                   key={link.href}
                   href={link.href}
                   className="hover:text-teal transition-colors duration-200"
@@ -88,7 +88,7 @@ export default function Header() {
         {isOpen && (
           <nav className="md:hidden mt-4 pb-4 border-t border-slate/10 pt-4 flex flex-col gap-4 font-mono text-xs uppercase tracking-[0.1em] text-slate">
             {navLinks.map((link) => (
-              
+              <a
                 key={link.href}
                 href={link.href}
                 onClick={handleNavClick}
