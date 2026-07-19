@@ -94,7 +94,12 @@ export default function BeyondTheCode() {
             online games — and I collect anime figurines on the side. It keeps
             things balanced and gives me space to think outside the code.
           </p>
-          <p className="text-xs"></p>
+          <p className="text-slate text-sm">
+            A lot of my best debugging happens away from the keyboard — stepping
+            back into something unrelated is usually what gets me unstuck. The
+            photos on the right are a small, rotating look at that side of
+            things. Click through for more.
+          </p>
         </div>
 
         <button

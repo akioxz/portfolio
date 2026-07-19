@@ -2,10 +2,31 @@
 
 import React, { useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 import SplitText from "./react-bits/SplitText";
 import RotatingText from "./react-bits/RotatingText";
 import PixelTransition from "./react-bits/PixelTransition";
 import { VscMail, VscGithub, VscArrowRight } from "react-icons/vsc";
+
+/* ─── Entrance animation — staggers each block in on landing instead of
+   everything rendering at once. Headline keeps its own SplitText
+   word-reveal; this just handles the blocks that had no animation
+   before (avatar/name row, bio, CTA). ────────────────────────────── */
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.12, delayChildren: 0.05 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 18 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
 
 /* ─── Inline Tech Badge ────────────────────────────────────────── */
 function Badge({ icon, label }: { icon?: React.ReactNode; label: string }) {
@@ -44,9 +65,15 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="mb-20">
+    <motion.section
+      id="hero"
+      className="mb-20"
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+    >
       {/* ── Avatar + Name Row ─────────────────── */}
-      <div className="flex items-center gap-5 mb-6">
+      <motion.div variants={itemVariants} className="flex items-center gap-5 mb-6">
         {/* Circular Avatar with Pixel Transition */}
         <div
           className="w-[130px] h-[130px] shrink-0"
@@ -92,8 +119,7 @@ export default function Hero() {
           </h1>
           {/* Social Icons Row */}
           <div className="flex items-center gap-3 text-slate">
-            <a
-              href="https://github.com/akioxz"
+            <a href="https://github.com/akioxz"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-teal transition-colors duration-200"
@@ -101,8 +127,7 @@ export default function Hero() {
             >
               <VscGithub className="w-5 h-5" />
             </a>
-            <a
-              href="mailto:akiocodm@gmail.com"
+            <a href="mailto:dev.akioxz@gmail.com"
               className="hover:text-teal transition-colors duration-200"
               aria-label="Email"
             >
@@ -110,7 +135,7 @@ export default function Hero() {
             </a>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* ── Headline ──────────────────────────── */}
       <div className="flex flex-wrap items-baseline gap-2 mb-6">
@@ -135,17 +160,21 @@ export default function Hero() {
       </div>
 
       {/* ── Bio with inline tech badges ───────── */}
-      <p className="text-slate text-base leading-[1.85] mb-8 max-w-2xl">
+      <motion.p
+        variants={itemVariants}
+        className="text-slate text-base leading-[1.85] mb-8 max-w-2xl"
+      >
         4th-year BSIT student passionate about full-stack software engineering —
         building web and mobile applications with <Badge label="React Native" />{" "}
         and <Badge label="Supabase" />. Lately diving into AI integration and
         generative AI, exploring how these tools can be applied to real-world
         software development. Still learning, but actively building and shipping
         projects along the way.
-      </p>
+      </motion.p>
 
       {/* ── CTA Button ────────────────────────── */}
-      <button
+      <motion.button
+        variants={itemVariants}
         type="button"
         onClick={handleButtonClick}
         className="group inline-flex items-center gap-2 bg-cream text-ink px-5 py-3 rounded-md font-mono text-sm font-semibold hover:bg-cream/90 transition-colors duration-300 select-none"
@@ -162,7 +191,7 @@ export default function Hero() {
           elementLevelClassName="inline-block"
         />
         <VscArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 shrink-0" />
-      </button>
-    </section>
+      </motion.button>
+    </motion.section>
   );
 }
