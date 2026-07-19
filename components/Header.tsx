@@ -23,7 +23,6 @@ export default function Header() {
   };
 
   const navLinks = [
-    { label: "home", href: "#hero" },
     { label: "projects", href: "#projects" },
     { label: "stack", href: "#stack" },
     { label: "education", href: "#education" },
