@@ -73,7 +73,10 @@ export default function Hero() {
       animate="show"
     >
       {/* ── Avatar + Name Row ─────────────────── */}
-      <motion.div variants={itemVariants} className="flex items-center gap-5 mb-6">
+      <motion.div
+        variants={itemVariants}
+        className="flex items-center gap-5 mb-6"
+      >
         {/* Circular Avatar with Pixel Transition */}
         <div
           className="w-[130px] h-[130px] shrink-0"
@@ -119,7 +122,8 @@ export default function Hero() {
           </h1>
           {/* Social Icons Row */}
           <div className="flex items-center gap-3 text-slate">
-            <a href="https://github.com/akioxz"
+            <a
+              href="https://github.com/akioxz"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-teal transition-colors duration-200"
@@ -127,7 +131,8 @@ export default function Hero() {
             >
               <VscGithub className="w-5 h-5" />
             </a>
-            <a href="mailto:dev.akioxz@gmail.com"
+            <a
+              href="mailto:dev.akioxz@gmail.com"
               className="hover:text-teal transition-colors duration-200"
               aria-label="Email"
             >
