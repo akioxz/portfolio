@@ -38,7 +38,6 @@ export default function Header() {
   const navLinks = [
     { label: "projects", href: "#projects" },
     { label: "stack", href: "#stack" },
-    { label: "activity", href: "#github" },
     { label: "education", href: "#education" },
     { label: "certs", href: "#certifications" },
     { label: "contact", href: "#contact" },
