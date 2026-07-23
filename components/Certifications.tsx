@@ -1,14 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import SplitText from "./react-bits/SplitText";
 import { certificationsData } from "@/data/certifications";
 
 export default function Certifications() {
+  const [showAll, setShowAll] = useState(false);
   if (certificationsData.length === 0) return null;
-  const visibleCerts = certificationsData.slice(0, 3);
+  const visibleCerts = showAll ? certificationsData : certificationsData.slice(0, 3);
 
   return (
-    <section id="certifications" className="mb-20">
+    <section id="certifications" className="mb-20 scroll-mt-24">
       <div className="flex items-center justify-between mb-8">
         <SplitText
           text="Certifications"
@@ -23,12 +25,13 @@ export default function Certifications() {
         />
 
         {certificationsData.length > 3 && (
-          <a
-            href="#"
-            className="font-mono text-xs text-slate hover:text-teal transition-colors shrink-0 ml-4"
+          <button
+            type="button"
+            onClick={() => setShowAll(!showAll)}
+            className="font-mono text-xs text-slate hover:text-teal transition-colors shrink-0 ml-4 cursor-pointer"
           >
-            View All →
-          </a>
+            {showAll ? "Show Less ←" : "View All →"}
+          </button>
         )}
       </div>
 
@@ -48,7 +51,6 @@ export default function Certifications() {
                 {cert.credentialId && ` · Credential ID ${cert.credentialId}`}
               </p>
 
-              {/* CSS-based Mock Certificate Thumbnail representing real credential asset */}
               <div className="mt-3 w-36 h-20 rounded border border-slate/15 bg-surface/30 p-2 flex flex-col justify-between font-mono text-[7px] text-slate/80 select-none shadow-md">
                 <div className="flex justify-between items-center border-b border-slate/10 pb-1">
                   <span className="font-bold tracking-wider text-[6px]">
@@ -64,12 +66,6 @@ export default function Certifications() {
                   <span>{cert.date.split(" ")[0]}</span>
                 </div>
               </div>
-
-              {/* TODO: Swap in real image thumbnail when available:
-              // {cert.thumbnail && (
-              //   <img src={cert.thumbnail} alt={cert.title} className="mt-3 w-36 h-20 object-cover rounded border border-slate/15" />
-              // )}
-              */}
             </div>
           </div>
         ))}
@@ -77,3 +73,4 @@ export default function Certifications() {
     </section>
   );
 }
+

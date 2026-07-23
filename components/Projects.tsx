@@ -11,7 +11,6 @@ import {
 } from "react-icons/si";
 import { VscCode } from "react-icons/vsc";
 
-/* ─── Project Data ─────────────────────────────────────────────── */
 const projects = [
   {
     name: "Atelier Carven",
@@ -19,7 +18,7 @@ const projects = [
     description:
       "Luxury furniture e-commerce app — role-based admin/user navigation, Supabase RLS-secured data layer, and full spec-compliance review.",
     tags: ["React Native", "Expo", "TypeScript", "Supabase"],
-    image: null, // Replace with "/projects/ateliercarven.png"
+    image: null,
   },
   {
     name: "Quorin",
@@ -27,11 +26,10 @@ const projects = [
     description:
       "PC parts e-commerce platform — category-based catalog with spec comparison, role-based admin dashboard, and Supabase-backed inventory management.",
     tags: ["Next.js", "TypeScript", "Supabase", "Zustand"],
-    image: null, // Replace with "/projects/quorin.png"
+    image: null,
   },
 ];
 
-/* ─── Tag Icon Helper ──────────────────────────────────────────── */
 function getTagIcon(tag: string) {
   switch (tag.toLowerCase()) {
     case "react native":
@@ -89,15 +87,9 @@ function getTagIcon(tag: string) {
   }
 }
 
-/* ─── "In Progress" Preview ────────────────────────────────────────
-   Shown in the screenshot slot for projects without a real preview
-   image yet — a subtle animated dot-grid with a slow-sweeping
-   spotlight and a pulsing "in development" status, instead of a
-   plain static name sitting in an empty box. ─────────────────────── */
 function BuildingPreview({ name }: { name: string }) {
   return (
     <div className="relative w-full h-full overflow-hidden bg-surface">
-      {/* Dot grid */}
       <div
         className="absolute inset-0 opacity-[0.35]"
         style={{
@@ -107,7 +99,6 @@ function BuildingPreview({ name }: { name: string }) {
         }}
       />
 
-      {/* Sweeping spotlight */}
       <motion.div
         className="absolute inset-0"
         style={{
@@ -125,7 +116,6 @@ function BuildingPreview({ name }: { name: string }) {
         }}
       />
 
-      {/* Centered label */}
       <div className="relative w-full h-full flex flex-col items-center justify-center gap-2">
         <span className="font-mono text-sm text-slate/70 select-none tracking-wide">
           {name}
@@ -154,10 +144,8 @@ function ProjectCard({
 }) {
   return (
     <div className="group block rounded-xl border border-slate/10 bg-surface/50 overflow-hidden transition-all duration-300 hover:border-slate/25 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/10">
-      {/* Screenshot Preview */}
       <div className="relative aspect-[16/10] bg-surface overflow-hidden">
         {image ? (
-          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={image}
             alt={`${name} preview`}
@@ -168,9 +156,7 @@ function ProjectCard({
         )}
       </div>
 
-      {/* Card Body */}
       <div className="p-5">
-        {/* Title + Status Badge */}
         <div className="flex items-center gap-2 mb-2">
           <h3 className="font-mono text-base font-semibold text-cream">
             {name}
@@ -182,12 +168,10 @@ function ProjectCard({
           )}
         </div>
 
-        {/* Description */}
         <p className="text-slate text-sm leading-relaxed mb-4 line-clamp-2">
           {description}
         </p>
 
-        {/* Tech Icons (not text) */}
         <div className="flex flex-wrap items-center gap-3">
           {tags.map((tag) => getTagIcon(tag))}
         </div>
@@ -196,7 +180,6 @@ function ProjectCard({
   );
 }
 
-/* ─── Projects Section ─────────────────────────────────────────── */
 export default function Projects() {
   return (
     <section id="projects" className="mb-20 scroll-mt-24">
@@ -212,7 +195,6 @@ export default function Projects() {
         threshold={0.2}
       />
 
-      {/* 2-Column Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {projects.map((project) => (
           <ProjectCard key={project.name} {...project} />

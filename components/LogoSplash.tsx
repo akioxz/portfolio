@@ -5,14 +5,9 @@ import { motion, AnimatePresence } from "motion/react";
 
 interface LogoSplashProps {
   onComplete: () => void;
-  holdDuration?: number; // ms the logo stays fully visible before fading out
+  holdDuration?: number;
 }
 
-/* ─── Logo splash ──────────────────────────────────────────────────
-   Brief full-screen overlay showing the "AJV" wordmark on load, then
-   fades out to reveal the page underneath. Matches Header.tsx's logo
-   styling (font-mono, bold, tracking-widest) so it reads as the same
-   mark, not a separate design. ───────────────────────────────────── */
 export default function LogoSplash({
   onComplete,
   holdDuration = 550,
@@ -51,3 +46,4 @@ export default function LogoSplash({
     </AnimatePresence>
   );
 }
+

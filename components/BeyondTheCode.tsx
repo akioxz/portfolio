@@ -130,22 +130,27 @@ export default function BeyondTheCode() {
       {isGalleryOpen &&
         createPortal(
           <div
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/80 p-4 sm:p-6 backdrop-blur-sm"
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/85 p-4 sm:p-8 backdrop-blur-md"
             onClick={() => setIsGalleryOpen(false)}
           >
             <div
-              className="relative w-full max-w-5xl max-h-[85vh] overflow-y-auto rounded-2xl border border-white/10 bg-slate-950/80 p-4 shadow-2xl sm:p-6"
+              className="relative w-full max-w-5xl h-[80vh] min-h-[400px] overflow-hidden rounded-2xl border border-slate/20 bg-surface/95 p-4 sm:p-6 shadow-2xl flex flex-col"
               onClick={(event) => event.stopPropagation()}
             >
-              <button
-                type="button"
-                onClick={() => setIsGalleryOpen(false)}
-                className="absolute right-4 top-4 z-10 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-sm text-cream transition hover:bg-white/20"
-                aria-label="Close gallery"
-              >
-                ×
-              </button>
-              <div className="h-[70vh] min-h-[320px] w-full">
+              <div className="flex items-center justify-between pb-3 border-b border-slate/10 mb-3">
+                <span className="font-mono text-xs text-cream font-medium tracking-wider uppercase">
+                  Gallery — Beyond the Code
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setIsGalleryOpen(false)}
+                  className="rounded-full border border-slate/20 bg-surface px-3 py-1 font-mono text-xs text-slate transition hover:text-cream hover:border-slate/40 cursor-pointer"
+                  aria-label="Close gallery"
+                >
+                  Esc / Close ✕
+                </button>
+              </div>
+              <div className="flex-1 w-full relative overflow-y-auto">
                 <Masonry items={galleryItems} />
               </div>
             </div>

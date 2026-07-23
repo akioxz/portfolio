@@ -12,15 +12,10 @@ export default function GithubActivity() {
   const [selectedYear, setSelectedYear] = useState<number>(2026);
   const [liveData, setLiveData] = useState<ContributionYearData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // True only once a live-fetch attempt has actually failed — distinct from
-  // "still loading," so we don't flash the disclosure before we know we need it.
   const [fetchFailed, setFetchFailed] = useState<boolean>(false);
 
   const githubUsername = process.env.NEXT_PUBLIC_GITHUB_USERNAME || "akioxz";
 
-  // Fetch live data from server API, fall back to a seeded local generator on
-  // failure/missing tokens. The fallback is disclosed in the UI (see
-  // `fetchFailed` below) — it should never be presented as real activity.
   useEffect(() => {
     let active = true;
     setIsLoading(true);
@@ -38,7 +33,7 @@ export default function GithubActivity() {
       })
       .catch(() => {
         if (active) {
-          setLiveData(null); // Triggers fallback to local mock generator
+          setLiveData(null);
           setFetchFailed(true);
         }
       })
@@ -51,13 +46,11 @@ export default function GithubActivity() {
     };
   }, [selectedYear, githubUsername]);
 
-  // Determine active dataset
   const data = useMemo<ContributionYearData>(() => {
     if (liveData) return liveData;
     return getContributionsForYear(selectedYear);
   }, [selectedYear, liveData]);
 
-  // Chunk days into columns of 7 days (weeks)
   const weeks = useMemo(() => {
     const chunks = [];
     for (let i = 0; i < data.days.length; i += 7) {
@@ -66,7 +59,6 @@ export default function GithubActivity() {
     return chunks;
   }, [data.days]);
 
-  // Determine month label alignment
   const monthLabels = useMemo(() => {
     let lastMonth = -1;
     return weeks.map((week) => {
@@ -135,10 +127,8 @@ export default function GithubActivity() {
         </div>
       </div>
 
-      {/* Heatmap Grid Wrapper */}
       <div className="p-5 rounded-lg border border-slate/15 bg-surface/35 overflow-hidden">
         <div className="flex items-start">
-          {/* Weekday indicators */}
           <div className="flex flex-col gap-[3px] pr-2 font-mono text-[8px] text-slate select-none pt-4 text-right w-6">
             <span className="h-[9px] leading-none flex items-center justify-end">Sun</span>
             <span className="h-[9px]" />
@@ -149,9 +139,7 @@ export default function GithubActivity() {
             <span className="h-[9px] leading-none flex items-center justify-end">Sat</span>
           </div>
 
-          {/* Map Grid */}
           <div className="flex-1 overflow-x-auto pb-2 scrollbar-thin select-none">
-            {/* Months Header row */}
             <div className="flex gap-[3px] font-mono text-[8px] text-slate/75 mb-1 h-3">
               {monthLabels.map((label, index) => (
                 <div key={index} className="w-[9px] shrink-0 text-left overflow-visible whitespace-nowrap">
@@ -160,7 +148,6 @@ export default function GithubActivity() {
               ))}
             </div>
 
-            {/* Weeks columns grid */}
             <div className="flex gap-[3px]">
               {weeks.map((week, weekIndex) => (
                 <div key={weekIndex} className="flex flex-col gap-[3px]">
@@ -189,7 +176,6 @@ export default function GithubActivity() {
           </div>
         </div>
 
-        {/* Legend */}
         <div className="flex items-center justify-end gap-1.5 font-mono text-[9px] text-slate mt-4 pr-1">
           <span>Less</span>
           <div className="w-[9px] h-[9px] rounded-[1px] bg-slate/10 dark:bg-slate/5" />
@@ -203,3 +189,4 @@ export default function GithubActivity() {
     </section>
   );
 }
+

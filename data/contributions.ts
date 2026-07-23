@@ -1,6 +1,6 @@
 export interface ContributionDay {
   date: string;
-  count: number; // 0 to 10+
+  count: number;
 }
 
 export interface ContributionYearData {
@@ -15,19 +15,16 @@ export function getContributionsForYear(year: number): ContributionYearData {
   const startDate = new Date(year, 0, 1);
   const endDate = new Date(year, 11, 31);
   
-  // Seeded random to make the map static and stable, but realistic
   let seed = year;
   const pseudoRandom = () => {
     const x = Math.sin(seed++) * 10000;
     return x - Math.floor(x);
   };
 
-  // Add offset to start from the first Sunday before Jan 1st if we want a clean calendar grid alignment
   const startDayOfWeek = startDate.getDay();
   const adjustedStart = new Date(startDate);
   adjustedStart.setDate(startDate.getDate() - startDayOfWeek);
 
-  // Likewise, fill until the end of the last week (Saturday)
   const endDayOfWeek = endDate.getDay();
   const adjustedEnd = new Date(endDate);
   adjustedEnd.setDate(endDate.getDate() + (6 - endDayOfWeek));
@@ -42,9 +39,8 @@ export function getContributionsForYear(year: number): ContributionYearData {
       const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
       const r = pseudoRandom();
       
-      // Generate some busy seasons and vacation seasons
       const month = d.getMonth();
-      const seasonalModifier = Math.sin((month / 11) * Math.PI) * 0.3 + 0.7; // higher mid-year
+      const seasonalModifier = Math.sin((month / 11) * Math.PI) * 0.3 + 0.7;
 
       if (isWeekend) {
         if (r > 0.85) count = Math.floor(r * 2);
@@ -63,3 +59,4 @@ export function getContributionsForYear(year: number): ContributionYearData {
 
   return { total, days };
 }
+

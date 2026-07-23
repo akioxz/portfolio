@@ -16,10 +16,36 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Axel Villanueva | 4th Year BSIT Student",
-  description: "Full-stack developer.",
+  title: "Axel Villanueva | Full-Stack Developer",
+  description:
+    "4th-year BSIT student & full-stack web & mobile developer specializing in React, Next.js, React Native, and Supabase.",
+  keywords: [
+    "Axel Villanueva",
+    "Full-Stack Developer",
+    "React",
+    "Next.js",
+    "React Native",
+    "TypeScript",
+    "Supabase",
+    "Portfolio",
+  ],
+  authors: [{ name: "Axel Villanueva" }],
   icons: {
     icon: "/favicon.svg",
+  },
+  openGraph: {
+    title: "Axel Villanueva | Full-Stack Developer",
+    description:
+      "Full-stack software engineering, web & mobile applications with React, Next.js, React Native, and Supabase.",
+    type: "website",
+    locale: "en_US",
+    siteName: "Axel Villanueva Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Axel Villanueva | Full-Stack Developer",
+    description:
+      "Full-stack software engineering, web & mobile applications with React, Next.js, React Native, and Supabase.",
   },
 };
 

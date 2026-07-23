@@ -46,11 +46,6 @@ body {
   background-color: rgb(var(--bg));
 }
 
-/* ─── Subtle grain/noise texture ──────────────────────────────────
-   A fixed, full-viewport SVG-noise overlay. Very low opacity, mix-
-   blend-mode softens it into the existing monochrome palette instead
-   of adding visible color. pointer-events: none so it never blocks
-   clicks/hover on anything underneath. ────────────────────────────── */
 body::before {
   content: "";
   position: fixed;

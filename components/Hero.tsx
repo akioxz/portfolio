@@ -8,10 +8,6 @@ import RotatingText from "./react-bits/RotatingText";
 import PixelTransition from "./react-bits/PixelTransition";
 import { VscMail, VscGithub, VscArrowRight } from "react-icons/vsc";
 
-/* ─── Entrance animation — staggers each block in on landing instead of
-   everything rendering at once. Headline keeps its own SplitText
-   word-reveal; this just handles the blocks that had no animation
-   before (avatar/name row, bio, CTA). ────────────────────────────── */
 const containerVariants = {
   hidden: {},
   show: {
@@ -28,7 +24,6 @@ const itemVariants = {
   },
 };
 
-/* ─── Inline Tech Badge ────────────────────────────────────────── */
 function Badge({ icon, label }: { icon?: React.ReactNode; label: string }) {
   return (
     <span className="inline-flex items-center gap-1.5 bg-surface/80 border border-slate/25 rounded-sm px-2.5 py-0.5 text-[13px] font-mono font-medium text-cream whitespace-nowrap align-middle mx-0.5">
@@ -72,12 +67,10 @@ export default function Hero() {
       initial="hidden"
       animate="show"
     >
-      {/* ── Avatar + Name Row ─────────────────── */}
       <motion.div
         variants={itemVariants}
         className="flex items-center gap-5 mb-6"
       >
-        {/* Circular Avatar with Pixel Transition */}
         <div
           className="w-[130px] h-[130px] shrink-0"
           style={{ transform: "translateZ(0)", willChange: "transform" }}
@@ -115,12 +108,10 @@ export default function Hero() {
           />
         </div>
 
-        {/* Name + Social Icons */}
         <div style={{ transform: "translateZ(0)", willChange: "transform" }}>
           <h1 className="font-mono text-[2rem] font-semibold text-cream leading-none mb-2">
             Axel Villanueva
           </h1>
-          {/* Social Icons Row */}
           <div className="flex items-center gap-3 text-slate">
             <a
               href="https://github.com/akioxz"
@@ -142,7 +133,6 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* ── Headline ──────────────────────────── */}
       <div className="flex flex-wrap items-baseline gap-2 mb-6">
         <SplitText
           text="Freelance Web Developer"
@@ -164,7 +154,6 @@ export default function Hero() {
         </span>
       </div>
 
-      {/* ── Bio with inline tech badges ───────── */}
       <motion.p
         variants={itemVariants}
         className="text-slate text-base leading-[1.85] mb-8 max-w-2xl"
@@ -177,7 +166,6 @@ export default function Hero() {
         projects along the way.
       </motion.p>
 
-      {/* ── CTA Button ────────────────────────── */}
       <motion.button
         variants={itemVariants}
         type="button"
@@ -200,3 +188,4 @@ export default function Hero() {
     </motion.section>
   );
 }
+

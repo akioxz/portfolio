@@ -20,7 +20,6 @@ export async function GET(request: Request) {
     );
   }
 
-  // Calculate start and end dates for the year query
   const from = `${year}-01-01T00:00:00Z`;
   const to = `${year}-12-31T23:59:59Z`;
 
@@ -53,7 +52,7 @@ export async function GET(request: Request) {
         query,
         variables: { username, from, to },
       }),
-      next: { revalidate: 3600 }, // Cache response for 1 hour
+      next: { revalidate: 3600 },
     });
 
     const result = await response.json();
@@ -64,7 +63,6 @@ export async function GET(request: Request) {
 
     const calendar = result.data.user.contributionsCollection.contributionCalendar;
     
-    // Format weeks array to match our frontend format
     const days = calendar.weeks.flatMap((w: any) =>
       w.contributionDays.map((d: any) => ({
         date: d.date,
@@ -80,3 +78,4 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+

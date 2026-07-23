@@ -7,6 +7,7 @@ import LogoSplash from "@/components/LogoSplash";
 
 import Projects from "@/components/Projects";
 import Stack from "@/components/Stack";
+import GithubActivity from "@/components/GithubActivity";
 import Education from "@/components/Education";
 import Certifications from "@/components/Certifications";
 import BeyondTheCode from "@/components/BeyondTheCode";
@@ -26,6 +27,7 @@ export default function Home() {
 
         <Projects />
         <Stack />
+        <GithubActivity />
         <Education />
         <Certifications />
         <BeyondTheCode />
@@ -34,3 +36,4 @@ export default function Home() {
     </>
   );
 }
+

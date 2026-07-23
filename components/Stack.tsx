@@ -27,7 +27,6 @@ import {
 } from "react-icons/si";
 import { VscCode } from "react-icons/vsc";
 
-// Define Frontend Stack Items mapped to Si Icons
 const frontendIcons = [
   { name: "HTML", icon: SiHtml5 },
   { name: "CSS", icon: SiCss },
@@ -42,7 +41,6 @@ const frontendIcons = [
   { name: "Tailwind", icon: SiTailwindcss },
 ];
 
-// Define Backend Stack Items mapped to Si Icons
 const backendIcons = [
   { name: "Node.js", icon: SiNodedotjs },
   { name: "Express", icon: SiExpress },
@@ -55,7 +53,6 @@ const backendIcons = [
   { name: "Supabase", icon: SiSupabase },
 ];
 
-// Define Tools Stack Items mapped to Si Icons
 const toolsIcons = [
   { name: "Git", icon: SiGit },
   { name: "GitHub", icon: SiGithub },
@@ -63,7 +60,6 @@ const toolsIcons = [
 ];
 
 export default function Stack() {
-  // Helper to convert icons list to LogoLoop items format
   const getLogoItems = (
     items: { name: string; icon: any }[],
     accentColorClass: string,
@@ -97,7 +93,6 @@ export default function Stack() {
       />
 
       <div className="flex flex-col gap-6">
-        {/* Frontend Loop */}
         <div>
           <p className="font-mono text-xs text-slate mb-3">frontend</p>
           <LogoLoop
@@ -113,7 +108,6 @@ export default function Stack() {
           />
         </div>
 
-        {/* Backend Loop */}
         <div>
           <p className="font-mono text-xs text-slate mb-3">backend</p>
           <LogoLoop
@@ -129,7 +123,6 @@ export default function Stack() {
           />
         </div>
 
-        {/* Tools Loop */}
         <div>
           <p className="font-mono text-xs text-slate mb-3">tools</p>
           <LogoLoop
@@ -148,3 +141,4 @@ export default function Stack() {
     </section>
   );
 }
+
