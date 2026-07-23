@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "motion/react";
 import SplitText from "./react-bits/SplitText";
 import {
   SiReact,
@@ -88,7 +89,56 @@ function getTagIcon(tag: string) {
   }
 }
 
-/* ─── Project Card ─────────────────────────────────────────────── */
+/* ─── "In Progress" Preview ────────────────────────────────────────
+   Shown in the screenshot slot for projects without a real preview
+   image yet — a subtle animated dot-grid with a slow-sweeping
+   spotlight and a pulsing "in development" status, instead of a
+   plain static name sitting in an empty box. ─────────────────────── */
+function BuildingPreview({ name }: { name: string }) {
+  return (
+    <div className="relative w-full h-full overflow-hidden bg-surface">
+      {/* Dot grid */}
+      <div
+        className="absolute inset-0 opacity-[0.35]"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgb(var(--text-secondary)) 1px, transparent 1px)",
+          backgroundSize: "16px 16px",
+        }}
+      />
+
+      {/* Sweeping spotlight */}
+      <motion.div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(220px circle at var(--x) var(--y), rgba(var(--spotlight), 0.16), transparent 70%)",
+        }}
+        animate={{
+          "--x": ["10%", "90%", "10%"],
+          "--y": ["20%", "80%", "20%"],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* Centered label */}
+      <div className="relative w-full h-full flex flex-col items-center justify-center gap-2">
+        <span className="font-mono text-sm text-slate/70 select-none tracking-wide">
+          {name}
+        </span>
+        <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-amber/70">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber/70 animate-pulse" />
+          upgrading
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function ProjectCard({
   name,
   status,
@@ -114,11 +164,7 @@ function ProjectCard({
             className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-surface">
-            <span className="font-mono text-sm text-slate/40 select-none">
-              {name}
-            </span>
-          </div>
+          <BuildingPreview name={name} />
         )}
       </div>
 

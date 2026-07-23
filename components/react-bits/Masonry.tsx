@@ -6,7 +6,7 @@ import { gsap } from "gsap";
 interface MasonryItem {
   id: string;
   img: string;
-  height: number;
+  aspectRatio: number; // height ÷ width, e.g. 1.2 = 20% taller than wide
 }
 
 interface MasonryProps {
@@ -45,12 +45,23 @@ const useMeasure = () => {
   const [size, setSize] = useState({ width: 0, height: 0 });
   useLayoutEffect(() => {
     if (!ref.current) return;
+    let frame: number | null = null;
     const ro = new ResizeObserver(([entry]) => {
-      const { width, height } = entry.contentRect;
-      setSize({ width, height });
+      // Debounce via rAF — avoids re-running the full masonry layout +
+      // GSAP animation on every intermediate resize tick, which was a
+      // real source of jank on mobile (orientation change, viewport
+      // resize, keyboard open/close all fire many rapid events).
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const { width, height } = entry.contentRect;
+        setSize({ width, height });
+      });
     });
     ro.observe(ref.current);
-    return () => ro.disconnect();
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      ro.disconnect();
+    };
   }, []);
   return [ref, size] as const;
 };
@@ -135,7 +146,11 @@ const Masonry = ({
     return items.map((child) => {
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = col * (columnWidth + gap);
-      const height = child.height / 2;
+      // Height scales with the actual column width at this viewport,
+      // so the tile keeps the same visual proportions on a 320px-wide
+      // phone as it does on a 1500px-wide desktop — this is what was
+      // producing oversized/distorted tiles on small screens before.
+      const height = columnWidth * child.aspectRatio;
       const y = colHeights[col];
       colHeights[col] += height + gap;
       return { ...child, x, y, w: columnWidth, h: height };

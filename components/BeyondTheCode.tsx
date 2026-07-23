@@ -32,15 +32,15 @@ export default function BeyondTheCode() {
 
   const galleryItems = useMemo(
     () => [
-      { id: "photo3", img: "/photo3.jpg", height: 360 },
-      { id: "photo4", img: "/photo4.jpg", height: 420 },
-      { id: "photo5", img: "/photo5.jpg", height: 380 },
-      { id: "photo6", img: "/photo6.jpg", height: 320 },
-      { id: "photo7", img: "/photo7.jpg", height: 460 },
-      { id: "photo8", img: "/photo8.jpeg", height: 340 },
-      { id: "photo9", img: "/photo9.jpeg", height: 400 },
-      { id: "photo10", img: "/photo10.jpeg", height: 360 },
-      { id: "photo11", img: "/photo11.jpeg", height: 440 },
+      { id: "photo3", img: "/photo3.jpg", aspectRatio: 0.6 },
+      { id: "photo4", img: "/photo4.jpg", aspectRatio: 0.7 },
+      { id: "photo5", img: "/photo5.jpg", aspectRatio: 0.63 },
+      { id: "photo6", img: "/photo6.jpg", aspectRatio: 0.53 },
+      { id: "photo7", img: "/photo7.jpg", aspectRatio: 0.77 },
+      { id: "photo8", img: "/photo8.jpeg", aspectRatio: 0.57 },
+      { id: "photo9", img: "/photo9.jpeg", aspectRatio: 0.67 },
+      { id: "photo10", img: "/photo10.jpeg", aspectRatio: 0.6 },
+      { id: "photo11", img: "/photo11.jpeg", aspectRatio: 0.73 },
     ],
     [],
   );
@@ -91,14 +91,14 @@ export default function BeyondTheCode() {
           />
           <p className="text-cream text-sm mb-4">
             Beyond development, I spend my downtime with movies, anime, and
-            online games — and I collect anime figurines on the side. It keeps
-            things balanced and gives me space to think outside the code.
+            online games — and I collect anime figurines on the side. It
+            keeps things balanced and gives me space to think outside the
+            code.
           </p>
           <p className="text-slate text-sm">
-            A lot of my best debugging happens away from the keyboard — stepping
-            back into something unrelated is usually what gets me unstuck. The
-            photos on the right are a small, rotating look at that side of
-            things. Click through for more.
+            A lot of my best debugging happens away from the keyboard —
+            stepping back into something unrelated is usually what gets me
+            unstuck.
           </p>
         </div>
 

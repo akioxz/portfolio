@@ -46,6 +46,27 @@ body {
   background-color: rgb(var(--bg));
 }
 
+/* ─── Subtle grain/noise texture ──────────────────────────────────
+   A fixed, full-viewport SVG-noise overlay. Very low opacity, mix-
+   blend-mode softens it into the existing monochrome palette instead
+   of adding visible color. pointer-events: none so it never blocks
+   clicks/hover on anything underneath. ────────────────────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-repeat: repeat;
+}
+
+.light body::before {
+  opacity: 0.035;
+}
+
 ::view-transition-old(root) {
   animation: theme-reveal-out 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
@@ -58,19 +79,17 @@ body {
   from {
     clip-path: circle(0 at var(--theme-reveal-x) var(--theme-reveal-y));
   }
+
   to {
-    clip-path: circle(
-      var(--theme-reveal-radius) at var(--theme-reveal-x) var(--theme-reveal-y)
-    );
+    clip-path: circle(var(--theme-reveal-radius) at var(--theme-reveal-x) var(--theme-reveal-y));
   }
 }
 
 @keyframes theme-reveal-out {
   from {
-    clip-path: circle(
-      var(--theme-reveal-radius) at var(--theme-reveal-x) var(--theme-reveal-y)
-    );
+    clip-path: circle(var(--theme-reveal-radius) at var(--theme-reveal-x) var(--theme-reveal-y));
   }
+
   to {
     clip-path: circle(0 at var(--theme-reveal-x) var(--theme-reveal-y));
   }

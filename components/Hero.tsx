@@ -170,7 +170,7 @@ export default function Hero() {
         className="text-slate text-base leading-[1.85] mb-8 max-w-2xl"
       >
         4th-year BSIT student passionate about full-stack software engineering —
-        building web and mobile applications with <Badge label="React Native" />{" "}
+        building web and mobile applications with <Badge label="React" />{" "}
         and <Badge label="Supabase" />. Lately diving into AI integration and
         generative AI, exploring how these tools can be applied to real-world
         software development. Still learning, but actively building and shipping
